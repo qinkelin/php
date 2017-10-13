@@ -1,0 +1,27 @@
+<?php
+$title=$_POST['title'];//标题
+
+$content=$_POST['content'];//内容
+
+$link = mysqli_connect('localhost','root','','news')or dir('数据库连接失败');
+mysqli_query($link, "set charset utf8");//解决中文写入的乱码
+//$title = mysqli_real_escape_string($link,$title);
+$sql = "INSERT INTO news(title, content, author) VALUES ('{$title}','{$content}','总编辑')";
+
+$result = mysqli_query($link,$sql);
+if($result){
+	echo"Success";
+}else{
+	echo"Failed";
+}
+
+echo $sql="select id from news where id=2";
+$res=mysqli_query($link,$sql);
+
+var_dump(mysqli_fetch_assoc($res));
+if($res||$res['num_rows']>0){
+	echo "成功";
+	mysqli_close($link);
+}
+
+?>
